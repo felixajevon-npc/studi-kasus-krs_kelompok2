@@ -70,10 +70,10 @@ public class main_krs {
                 jumlahSKS = sc.nextInt();
                 sc.nextLine();
 
-                if (jumlahSKS < 1 || jumlahSKS > 50) {
+                if (jumlahSKS < 1 || jumlahSKS > 3) {
                     System.out.println("Jumlah SKS tidak valid! Silakan input kembali.");
                 }
-            } while (jumlahSKS < 1 || jumlahSKS > 50);
+            } while (jumlahSKS < 1 || jumlahSKS > 3);
 
             if (totalSKS + jumlahSKS > 24) {
                 System.out.println("Error: Total SKS yang diambil mahasiswa tidak boleh lebih dari 24.");
