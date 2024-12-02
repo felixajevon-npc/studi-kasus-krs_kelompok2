@@ -130,24 +130,20 @@ public class main_krs {
     }
 
     public static void analisisDataKRS() {
-        System.out.println("\n--- Analisis Data KRS: Mahasiswa dengan Total SKS < 20 ---");
-        System.out.println("---------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-15s %-15s\n", "NIM", "Nama", "Total SKS");
-        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("\n--- Analisis Data KRS ---");
 
-        String[][] mahasiswa = new String[jumlahData][3];
+        String[][] mahasiswa = new String[jumlahData][2]; 
         int jumlahMahasiswa = 0;
 
         for (int i = 0; i < jumlahData; i++) {
             String nim = daftarKrs[i][0];
-            String nama = daftarKrs[i][1];
             int sks = Integer.parseInt(daftarKrs[i][4]);
 
             boolean sudahDihitung = false;
 
             for (int j = 0; j < jumlahMahasiswa; j++) {
                 if (mahasiswa[j][0].equals(nim)) {
-                    mahasiswa[j][2] = String.valueOf(Integer.parseInt(mahasiswa[j][2]) + sks);
+                    mahasiswa[j][1] = String.valueOf(Integer.parseInt(mahasiswa[j][1]) + sks);
                     sudahDihitung = true;
                     break;
                 }
@@ -155,26 +151,20 @@ public class main_krs {
 
             if (!sudahDihitung) {
                 mahasiswa[jumlahMahasiswa][0] = nim;
-                mahasiswa[jumlahMahasiswa][1] = nama;
-                mahasiswa[jumlahMahasiswa][2] = String.valueOf(sks);
+                mahasiswa[jumlahMahasiswa][1] = String.valueOf(sks);
                 jumlahMahasiswa++;
             }
         }
 
-        boolean ditemukan = false;
+        int jumlahKurangDari20 = 0;
         for (int i = 0; i < jumlahMahasiswa; i++) {
-            int totalSKS = Integer.parseInt(mahasiswa[i][2]);
+            int totalSKS = Integer.parseInt(mahasiswa[i][1]);
             if (totalSKS < 20) {
-                System.out.printf("%-10s %-15s %-15d\n", mahasiswa[i][0], mahasiswa[i][1], totalSKS);
-                ditemukan = true;
+                jumlahKurangDari20++;
             }
         }
 
-        if (!ditemukan) {
-            System.out.println("Tidak ada mahasiswa yang mengambil SKS kurang dari 20.");
-        }
-
-        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20: " + jumlahKurangDari20);
     }
 
 }
