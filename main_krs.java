@@ -16,6 +16,7 @@ public class main_krs {
             System.out.println("4. Keluar");
             System.out.print("Pilih menu (1-4) : ");
             int pilihMenu = sc.nextInt();
+            System.out.println();
 
             if (pilihMenu < 1 || pilihMenu > 4) {
                 System.out.println("Pilihan Menu Tidak Valid! Tolong Input Ulang.");
