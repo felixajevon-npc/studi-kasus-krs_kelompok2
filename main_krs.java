@@ -52,8 +52,22 @@ public class main_krs {
         System.out.println("--- Tambah Data KRS ---");
         System.out.print("Nama mahasiswa: ");
         String namaMahasiswa = sc.nextLine();
-        System.out.print("NIM: ");
-        String nim = sc.nextLine();
+        String nim;
+
+        boolean validasiNIM = false;
+        do {
+            System.out.print("NIM: ");
+            nim = sc.nextLine();
+
+            validasiNIM = true;
+            for (int i = 0; i < jumlahData; i++) {
+                if (daftarKrs[i][0].equals(nim)) {
+                    System.out.println("NIM sudah terdaftar! Silakan masukkan NIM yang berbeda.");
+                    validasiNIM = false;
+                    break;
+                }
+            }
+        } while (!validasiNIM);
 
         int totalSKS = 0;
         String pilihan;
@@ -77,7 +91,6 @@ public class main_krs {
 
             if (totalSKS + jumlahSKS > 24) {
                 System.out.println("Error: Total SKS yang diambil mahasiswa tidak boleh lebih dari 24.");
-                System.out.println("Silakan kurangi jumlah SKS atau ganti mata kuliah.");
             } else {
                 daftarKrs[jumlahData][0] = nim;
                 daftarKrs[jumlahData][1] = namaMahasiswa;
@@ -88,12 +101,14 @@ public class main_krs {
                 totalSKS += jumlahSKS;
                 jumlahData++;
             }
+            System.out.println("Total SKS yang sudah dimasukkan oleh mahasiswa: " + totalSKS);
 
             System.out.print("Tambah Mata Kuliah lain? (y/n): ");
             pilihan = sc.nextLine();
         } while (pilihan.equalsIgnoreCase("y"));
 
         System.out.println("Data KRS Berhasil Ditambahkan!");
+        System.out.println();
     }
 
     public static void tampilkanDaftarKRS() {
@@ -126,13 +141,14 @@ public class main_krs {
             System.out
                     .println("---------------------------------------------------------------------------------------");
             System.out.println("Total SKS: " + totalSKS);
+            System.out.println();
         }
     }
 
     public static void analisisDataKRS() {
         System.out.println("\n--- Analisis Data KRS ---");
 
-        String[][] mahasiswa = new String[jumlahData][2]; 
+        String[][] mahasiswa = new String[jumlahData][2];
         int jumlahMahasiswa = 0;
 
         for (int i = 0; i < jumlahData; i++) {
@@ -165,6 +181,7 @@ public class main_krs {
         }
 
         System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20: " + jumlahKurangDari20);
+        System.out.println();
     }
 
 }
