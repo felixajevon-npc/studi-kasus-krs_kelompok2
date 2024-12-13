@@ -60,12 +60,17 @@ public class main_krs {
             System.out.print("NIM: ");
             nim = sc.nextLine();
 
-            validasiNIM = true;
-            for (int i = 0; i < jumlahData; i++) {
-                if (daftarKrs[i][0].equals(nim)) {
-                    System.out.println("NIM sudah terdaftar! Silakan masukkan NIM yang berbeda.");
-                    validasiNIM = false;
-                    break;
+            if (nim.length() != 6) {
+                System.out.println("NIM harus berisi 6 digit angka.");
+                validasiNIM = false;
+            } else {
+                validasiNIM = true;
+                for (int i = 0; i < jumlahData; i++) {
+                    if (daftarKrs[i][0].equals(nim)) {
+                        System.out.println("NIM sudah terdaftar! Silakan masukkan NIM yang berbeda.");
+                        validasiNIM = false;
+                        break;
+                    }
                 }
             }
         } while (!validasiNIM);
@@ -120,17 +125,24 @@ public class main_krs {
         String nim = sc.nextLine();
 
         System.out.println("---------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-15s %-15s %-25s %s\n",
+        System.out.printf("%-10s %-15s %-15s %-25s %5s\n",
                 "NIM", "Nama", "Kode MK", "Nama Mata Kuliah", "SKS");
         System.out.println("---------------------------------------------------------------------------------------");
 
         boolean ditemukan = false;
         int totalSKS = 0;
+        boolean sudahTampilIdentitas = false;
 
         for (int i = 0; i < jumlahData; i++) {
             if (daftarKrs[i][0].equals(nim)) {
-                System.out.printf("%-10s %-15s %-15s %-25s %s\n",
-                        daftarKrs[i][0], daftarKrs[i][1], daftarKrs[i][2], daftarKrs[i][3], daftarKrs[i][4]);
+                if (!sudahTampilIdentitas) {
+                    System.out.printf("%-10s %-15s %-15s %-25s %5s\n",
+                            daftarKrs[i][0], daftarKrs[i][1], daftarKrs[i][2], daftarKrs[i][3], daftarKrs[i][4]);
+                    sudahTampilIdentitas = true;
+                } else {
+                    System.out.printf("%-10s %-15s %-15s %-25s %5s\n",
+                            "   ", "    ", daftarKrs[i][2], daftarKrs[i][3], daftarKrs[i][4]);
+                }
                 totalSKS += Integer.parseInt(daftarKrs[i][4]);
                 ditemukan = true;
             }
